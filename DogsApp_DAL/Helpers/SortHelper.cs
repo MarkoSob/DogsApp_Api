@@ -18,14 +18,13 @@ namespace DogsApp_DAL.Helpers
             {
                 return entities;
             }
-
-            var orderQueryBuilder = new StringBuilder();
+           
             var propertyInfos = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
             var objectProperty = propertyInfos.FirstOrDefault(pi => pi.Name.Equals(atribute, StringComparison.InvariantCultureIgnoreCase));
 
             string sortingOrder = !string.IsNullOrEmpty(order) && order.Equals(AppConstants.SortDescending) ? "descending" : string.Empty;
-            orderQueryBuilder.Append($"{objectProperty!.Name.ToString()} {sortingOrder}");
-            var orderByParameter =  entities.OrderBy(orderQueryBuilder.ToString());
+            string orderQueryString = $"{objectProperty!.Name} {sortingOrder}";
+            var orderByParameter =  entities.OrderBy(orderQueryString);
 
             return orderByParameter;
         }

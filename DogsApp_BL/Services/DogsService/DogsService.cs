@@ -23,7 +23,7 @@ namespace DogsApp_BL.Services.DogsService
         public string GetDogsAppInfo()
         {
             string version = Assembly.GetEntryAssembly()!.GetName().Version!.ToString();
-            var result = $"{AppConstants.AppInfo} {version}";
+            string result = $"{AppConstants.AppInfo} {version}";
             return result;
         }
 
